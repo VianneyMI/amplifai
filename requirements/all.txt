@@ -1,0 +1,5 @@
+-r core.txt
+-r linting.txt
+-r packaging.txt
+-r testing.txt
+-r typing.txt

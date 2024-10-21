@@ -1,4 +1,4 @@
-"""text-structurizer package."""
+"""`amplifai` package."""
 
 from amplifai.examples import Example
 from amplifai.amplifier import Amplifier

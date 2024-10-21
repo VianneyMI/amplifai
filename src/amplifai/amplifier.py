@@ -12,11 +12,10 @@ from langchain_core.prompts.chat import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.runnables import Runnable
 from langchain_mistralai import ChatMistralAI
 from langchain_openai import ChatOpenAI
-from pydantic import BaseModel, ConfigDict, ValidationInfo, field_validator
+from pydantic import BaseModel, ConfigDict
 
 from amplifai.examples import Example
 from amplifai.prompt import DEFAULT_HUMAN_PROMPT, DEFAULT_SYSTEM_PROMPT
-from amplifai.providers import get_chat_model, infer_llm_provider
 
 PydanticModel = TypeVar("PydanticModel", bound=BaseModel)
 ChatModel = TypeVar("ChatModel", bound=BaseChatModel)

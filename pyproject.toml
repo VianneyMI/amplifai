@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "amplifai"
-version = "0.0.1"
+version = "0.0.2"
 description = "Denoises unstructured raw data and amplifies the signal by transforming them into structured data."
 readme = "README.md"
 authors = [{name = "Vianney Mixtur", email = "vianney.mixtur@outlook.fr"}]
@@ -16,11 +16,11 @@ requires-python = ">= 3.10"
 Homepage = "https://github.com/VianneyMI/amplifai"
 
 [tool.bumpver]
-current_version = "0.0.1"
+current_version = "0.0.2"
 version_pattern = "MAJOR.MINOR.PATCH[PYTAGNUM]"
 commit_message = "bump version {old_version} -> {new_version}"
 commit = false
-tag = true
+tag = false
 push = false
 
 [tool.setuptools.dynamic]

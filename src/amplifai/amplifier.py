@@ -55,7 +55,7 @@ class Amplifier(BaseModel, Generic[ChatModel, PydanticModel]):
     # ------------------------------------------------------------
     # Sync Interface
     # ------------------------------------------------------------
-    def denoise(self, include_raw: bool = False, **kwargs: Any) -> Any:
+    def denoise(self, include_raw: bool = False, **kwargs: Any) -> PydanticModel:
         """Creates a pydantic object from textual unstructured data.
 
         Arguments:
@@ -78,7 +78,7 @@ class Amplifier(BaseModel, Generic[ChatModel, PydanticModel]):
     # ------------------------------------------------------------
     # Async Interface
     # ------------------------------------------------------------
-    async def async_denoise(self, include_raw: bool = False, **kwargs: Any) -> Any:
+    async def async_denoise(self, include_raw: bool = False, **kwargs: Any) -> PydanticModel:
         """Creates a pydantic object from textual unstructured data.
         Asynchronous version of the `amplifier.extract` method.
 
@@ -120,6 +120,13 @@ class Amplifier(BaseModel, Generic[ChatModel, PydanticModel]):
         self.examples = messages
 
         return self
+    
+
+    def _get_chat_model(self) -> type[BaseChatModel]:
+        """Returns the chat model type parameter of the amplifier instance."""
+
+        return self.__class__.__pydantic_generic_metadata__["args"][0]
+
 
     def _get_pydantic_model(self) -> type[PydanticModel]:
         """Returns the pydantic model type parameter of the amplifier instance."""
@@ -127,7 +134,7 @@ class Amplifier(BaseModel, Generic[ChatModel, PydanticModel]):
         # NOTE : Useful link to understand the below <VM, 28/02/2024>
         # https://discuss.python.org/t/runtime-access-to-type-parameters/37517
 
-        return self.__class__.__pydantic_generic_metadata__["args"][0]
+        return self.__class__.__pydantic_generic_metadata__["args"][1]
 
     def _create_chain(self, include_raw: bool = False) -> Runnable:
         """Creates the extraction chain.

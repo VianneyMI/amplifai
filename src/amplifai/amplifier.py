@@ -10,8 +10,6 @@ from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, ToolMessage
 from langchain_core.prompts.chat import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.runnables import Runnable
-from langchain_mistralai import ChatMistralAI
-from langchain_openai import ChatOpenAI
 from pydantic import BaseModel, ConfigDict
 
 from amplifai.examples import Example
@@ -21,12 +19,12 @@ PydanticModel = TypeVar("PydanticModel", bound=BaseModel)
 ChatModel = TypeVar("ChatModel", bound=BaseChatModel)
 
 
-class Amplifier(BaseModel, Generic[PydanticModel]):
+class Amplifier(BaseModel, Generic[ChatModel, PydanticModel]):
     """Structurize a text into a dictionary.
 
     Arguments
     -----------------------------------------------
-    llm: ChatOpenAI | ChatMistralAI | None
+    llm: ChatModel
         The language model to use.
     system_prompt::str|None
         The instructions to the system.
@@ -36,7 +34,7 @@ class Amplifier(BaseModel, Generic[PydanticModel]):
     """
 
 
-    llm: ChatOpenAI | ChatMistralAI
+    llm: ChatModel
     system_prompt: str | None = DEFAULT_SYSTEM_PROMPT
     #instructions: str | None = None # cf https://github.com/langchain-ai/langchain-extract/blob/main/backend/server/extraction_runnable.py
     human_prompt: str | None = DEFAULT_HUMAN_PROMPT

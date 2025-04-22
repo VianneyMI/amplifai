@@ -1,8 +1,8 @@
 """`amplifier.prompt` module.
 
-Defines a utility function to create a formatted prompt.
+Module containing default prompts.
+The below prompts are used by default by the :class:`amplifier.Amplifier` class.
 """
-
 
 DEFAULT_SYSTEM_PROMPT = """You are an AI assistant specialized in identifying relevant values in a text.
 

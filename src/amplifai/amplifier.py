@@ -20,12 +20,14 @@ ChatModel = TypeVar("ChatModel", bound=BaseChatModel)
 
 
 class Amplifier(BaseModel, Generic[ChatModel, PydanticModel]):
-    """Structurize a text into a dictionary.
+    """`amplifier.Amplifier` class.
+
+    The `amplifier.Amplifier` class is used to extract structured data from unstructured text.
 
     Arguments
     -----------------------------------------------
     llm: ChatModel
-        The language model to use.
+        The Large Language Model to use.
     system_prompt::str|None
         The instructions to the system.
     human_prompt::str|None
@@ -33,10 +35,9 @@ class Amplifier(BaseModel, Generic[ChatModel, PydanticModel]):
 
     """
 
-
     llm: ChatModel
     system_prompt: str | None = DEFAULT_SYSTEM_PROMPT
-    #instructions: str | None = None # cf https://github.com/langchain-ai/langchain-extract/blob/main/backend/server/extraction_runnable.py
+    # instructions: str | None = None # cf https://github.com/langchain-ai/langchain-extract/blob/main/backend/server/extraction_runnable.py
     human_prompt: str | None = DEFAULT_HUMAN_PROMPT
     examples: list[BaseMessage] = []  # Converted example
 
@@ -51,7 +52,6 @@ class Amplifier(BaseModel, Generic[ChatModel, PydanticModel]):
     # ------------------------------------------------------------
     model_config = ConfigDict(validate_default=True)
 
-    
     # ------------------------------------------------------------
     # Sync Interface
     # ------------------------------------------------------------
@@ -78,7 +78,9 @@ class Amplifier(BaseModel, Generic[ChatModel, PydanticModel]):
     # ------------------------------------------------------------
     # Async Interface
     # ------------------------------------------------------------
-    async def async_denoise(self, include_raw: bool = False, **kwargs: Any) -> PydanticModel:
+    async def async_denoise(
+        self, include_raw: bool = False, **kwargs: Any
+    ) -> PydanticModel:
         """Creates a pydantic object from textual unstructured data.
         Asynchronous version of the `amplifier.extract` method.
 
@@ -103,14 +105,13 @@ class Amplifier(BaseModel, Generic[ChatModel, PydanticModel]):
         self,
         examples: list[Example[PydanticModel]],
     ) -> Self:
-        """
-        Converts a list of examples to a list of base messages.
+        """Converts a list of examples to a list of base messages.
 
         Args:
-            examples (List[Any]): The list of examples to use.
+            examples (list[Example[PydanticModel]]): The list of examples to use.
 
         Returns:
-            List[BaseMessage]: The examples as tool messages.
+            list[BaseMessage]: The examples as tool messages.
         """
 
         messages = []
@@ -120,13 +121,11 @@ class Amplifier(BaseModel, Generic[ChatModel, PydanticModel]):
         self.examples = messages
 
         return self
-    
 
     def _get_chat_model(self) -> type[BaseChatModel]:
         """Returns the chat model type parameter of the amplifier instance."""
 
         return self.__class__.__pydantic_generic_metadata__["args"][0]
-
 
     def _get_pydantic_model(self) -> type[PydanticModel]:
         """Returns the pydantic model type parameter of the amplifier instance."""
@@ -181,8 +180,7 @@ class Amplifier(BaseModel, Generic[ChatModel, PydanticModel]):
         self,
         example: Example[PydanticModel],
     ) -> list[BaseMessage]:
-        """
-        Converts an example into a list of messages that can be fed ito an LLM.
+        """Converts an example into a list of messages that can be fed ito an LLM.
 
         Arguments:
         -----------------------------------------------
@@ -207,10 +205,14 @@ class Amplifier(BaseModel, Generic[ChatModel, PydanticModel]):
                 }
             )
 
-        messages.append(AIMessage(content="", additional_kwargs={"tool_calls": tool_calls}))
+        messages.append(
+            AIMessage(content="", additional_kwargs={"tool_calls": tool_calls})
+        )
         tool_messages = ["You have correctly called this tool."] * len(tool_calls)
 
         for tool_message, tool_output in zip(tool_messages, tool_calls):
-            messages.append(ToolMessage(content=tool_message, tool_call_id=tool_output["id"]))
+            messages.append(
+                ToolMessage(content=tool_message, tool_call_id=tool_output["id"])
+            )
 
         return messages

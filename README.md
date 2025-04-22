@@ -27,3 +27,47 @@ Alternatively, you can use any of the numerous python package managers such as p
 
 ## **Usage**
 
+Here's a simple example of how to use AMPLIFAI to extract structured information from text:
+
+```python
+from pydantic import BaseModel
+from langchain_openai import ChatOpenAI
+from amplifai import Amplifier
+
+# Define your data model
+class Person(BaseModel):
+    name: str
+    age: int
+    phone_number: str | None = None
+    email_adress: str | None = None
+
+# Initialize the LLM and Amplifier
+llm = ChatOpenAI(api_key="your-api-key", model="gpt-4")
+amplifier = Amplifier[ChatOpenAI, Person](llm=llm)
+
+# Extract structured data from text
+text = "John Doe is 25 years old. He lives in Paris and can be reached at +33 6 12 34 56 78 or at firstname.name@gmail.com"
+person = amplifier.denoise(text=text)
+
+# Access the structured data
+print(f"Name: {person.name}")
+print(f"Age: {person.age}")
+print(f"Phone: {person.phone_number}")
+print(f"Email: {person.email_adress}")
+```
+
+The package also supports other LLM providers like MistralAI:
+
+```python
+from langchain_mistralai import ChatMistralAI
+
+llm = ChatMistralAI(api_key="your-api-key", model="mistral-large-latest")
+amplifier = Amplifier[ChatMistralAI, Person](llm=llm)
+```
+
+Key features:
+- Define your data structure using Pydantic models
+- Use any supported LLM provider
+- Extract structured data from unstructured text with a single method call
+- Type-safe results with Pydantic validation
+

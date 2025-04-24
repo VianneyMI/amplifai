@@ -4,7 +4,8 @@ Defines the `Amplifier` class, which is the main class of the package.
 """
 
 import uuid
-from typing import Any, Generic, Self, TypeVar
+from typing import Any, Generic, TypeVar
+from typing_extensions import Self
 
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, ToolMessage

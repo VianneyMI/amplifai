@@ -5,7 +5,7 @@ from langchain_mistralai import ChatMistralAI
 from langchain_openai import ChatOpenAI
 
 from amplifai import Amplifier
-from setup import OPENAI_API_KEY, MISTRALAI_API_KEY
+from tests.setup import OPENAI_API_KEY, MISTRALAI_API_KEY
 
 
 class Person(BaseModel):

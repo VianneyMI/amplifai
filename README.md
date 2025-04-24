@@ -70,6 +70,32 @@ amplifier = Amplifier[ChatMistralAI, Person](llm=llm)
 In fact, you can use any LLM provider that is supported by [langchain](https://python.langchain.com/docs/integrations/providers/).
 However, you will need to first install the corresponding langchain integration.
 
+Assuming you use pip:
+
 ```bash
 pip install langchain-<provider>
 ```
+
+# Contributing
+
+We love contributions from the community! There are many ways you can help make AMPLIFAI better:
+
+## Ways to Contribute
+
+- 🐛 **Report Bugs**: Found a bug? Please create an issue with detailed steps to reproduce it
+- 💡 **Feature Requests**: Have an idea for a new feature? Open an issue and let's discuss it
+- 📝 **Improve Documentation**: Help us make the documentation clearer and more comprehensive
+- 🔧 **Code Contributions**: Submit pull requests for bug fixes or new features
+- 🌟 **Spread the Word**: Star the repository and share it with your network
+
+
+
+## Code of Conduct
+
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+
+# License
+
+By contributing, you agree that your contributions will be licensed under the project's [MIT License](LICENSE).
+
+Let's build something amazing together! 🚀

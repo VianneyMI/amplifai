@@ -7,8 +7,10 @@ This package allows to extract information from unstructured data and turns this
 ## **Features**
 
 * Creates LLM powered extraction and structuration logic
-* Integrates LLM providers easily
-* Provides a simple API to extract and structure data
+* Define your data structure using Pydantic models
+* Use any supported LLM provider
+* Extract structured data from unstructured text with a single method call
+* Type-safe results with Pydantic validation
 
 ## **Requirements**
 
@@ -65,9 +67,9 @@ llm = ChatMistralAI(api_key="your-api-key", model="mistral-large-latest")
 amplifier = Amplifier[ChatMistralAI, Person](llm=llm)
 ```
 
-Key features:
-- Define your data structure using Pydantic models
-- Use any supported LLM provider
-- Extract structured data from unstructured text with a single method call
-- Type-safe results with Pydantic validation
+In fact, you can use any LLM provider that is supported by [langchain](https://python.langchain.com/docs/integrations/providers/).
+However, you will need to first install the corresponding langchain integration.
 
+```bash
+pip install langchain-<provider>
+```
